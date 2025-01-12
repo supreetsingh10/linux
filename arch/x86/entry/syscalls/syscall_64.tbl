@@ -389,7 +389,8 @@
 463	common	setxattrat		sys_setxattrat
 464	common	getxattrat		sys_getxattrat
 465	common	listxattrat		sys_listxattrat
-466	common	removexattrat		sys_removexattrat
+466	common	removexattrat	sys_removexattrat
+467 common romani			sys_romani
 
 #
 # Due to a historical design error, certain syscalls are numbered differently

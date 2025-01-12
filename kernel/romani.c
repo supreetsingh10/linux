@@ -1,0 +1,22 @@
+#include "linux/printk.h"
+#include <linux/list.h>
+#include <linux/spinlock.h>
+#include <linux/spinlock_types.h>
+#include <linux/syscalls.h>
+#include <net/bluetooth/bluetooth.h>
+#include <net/bluetooth/hci_core.h>
+#include <linux/string.h>
+
+DEFINE_RWLOCK(hci_dev_list_lock);
+
+SYSCALL_DEFINE2(romani, char*, name, int, volume) {
+	struct hci_dev* hdev = NULL;
+
+	read_lock(&hci_dev_list_lock);
+	list_for_each_entry(hdev, &hci_dev_list, list) {
+		printk(KERN_INFO "Romani found here %s", hdev->name);
+	}
+	read_unlock(&hci_dev_list_lock);
+
+	return 0;
+}
