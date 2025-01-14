@@ -1,4 +1,4 @@
-#include "linux/printk.h"
+#include <linux/printk.h>
 #include <linux/list.h>
 #include <linux/spinlock.h>
 #include <linux/spinlock_types.h>
@@ -15,6 +15,8 @@ SYSCALL_DEFINE2(romani, char*, name, int, volume) {
 	read_lock(&hci_dev_list_lock);
 	list_for_each_entry(hdev, &hci_dev_list, list) {
 		printk(KERN_INFO "Romani found here %s", hdev->name);
+		if(strcmp(hdev->name, name) == 0) {
+		}
 	}
 	read_unlock(&hci_dev_list_lock);
 
